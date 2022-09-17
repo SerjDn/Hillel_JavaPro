@@ -34,9 +34,9 @@ public class Main {
         depTerm = scanner.nextInt();
 
         switch (depTerm) {
-            case 1 -> calcData(depAmount, 12);
-            case 2 -> calcData(depAmount, 60);
-            case 3 -> calcData(depAmount, 120);
+            case 1 -> calcData(depAmount, 1);
+            case 2 -> calcData(depAmount, 5);
+            case 3 -> calcData(depAmount, 10);
             default -> {
                 System.out.println("Invalid command, try again.");
                 scanner.close();
@@ -48,11 +48,11 @@ public class Main {
     }
 
     public static void calcData(double amount, int term) {
-        if (term == 12) {
-            depPercents = amount * 0.1;
-        } else if (term == 60) {
-            depPercents = amount * 0.2;
-        } else depPercents = amount * 0.3;
+        if (term == 1) {
+            depPercents = amount * term * 0.1;// 1 year - 10%
+        } else if (term == 5) {
+            depPercents = amount * term * 0.12;// 5 years - 12% per year
+        } else depPercents = amount * term * 0.15;// 10 years - 15% per year
     }
 
     public static void showResult() {

@@ -10,6 +10,7 @@ public class App2 {
     public static void main(String[] args) {
         getData();
         showResult();
+        calcAgain();
     }
 
     private static void getData() {
@@ -37,18 +38,17 @@ public class App2 {
             case 3 -> result = num1 * num2;
             case 4 -> {
                 if (num2 == 0) {
-                    System.out.println("Can't divide by zero! Try again.");
-                    getData();
+                    System.out.println("Can't divide by zero!");
+                    calcAgain();
                 } else result = num1 / num2;
             }
             case 0 -> {
                 System.out.println("App closed.");
-                scanner.close();
-                System.exit(0);
+                closeApp();
             }
             default -> {
-                System.out.println("Unknown command. Try again.");
-                getData();
+                System.out.println("Unknown command!");
+                calcAgain();
             }
         }
     }
@@ -56,6 +56,29 @@ public class App2 {
     private static void showResult() {
         System.out.printf("Result is: %.2f \n", result);
         System.out.println("==================================");
-        getData(); // Добавил вызов, т.к. по ТЗ закрытие приложения только через операцию выхода.
+    }
+
+    private static void calcAgain() {
+        System.out.println("""
+                Do you want to calc another operations?
+                1 - Calc again
+                0 - Close the app
+                """);
+
+        int selectOption = scanner.nextInt();
+        if (selectOption == 1) {
+            getData();
+        } else if (selectOption == 0) {
+            System.out.println("App closed.");
+            closeApp();
+        } else {
+            System.out.println("Unknown command! App closed.");
+            closeApp();
+        }
+    }
+
+    private static void closeApp() {
+        scanner.close();
+        System.exit(0);
     }
 }

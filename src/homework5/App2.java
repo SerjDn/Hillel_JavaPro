@@ -36,11 +36,10 @@ public class App2 {
             case 2 -> result = num1 - num2;
             case 3 -> result = num1 * num2;
             case 4 -> {
-                result = num1 / num2;
                 if (num2 == 0) {
                     System.out.println("Can't divide by zero! Try again.");
                     getData();
-                }
+                } else result = num1 / num2;
             }
             case 0 -> {
                 System.out.println("App closed.");

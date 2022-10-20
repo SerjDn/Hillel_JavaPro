@@ -18,7 +18,7 @@ public class CountOccurance {
         words.add("three");
         words.add("one");
 
-        final String str = "one";
+        String str = "one";
 
         System.out.println(countOccurance(words, str));
     }

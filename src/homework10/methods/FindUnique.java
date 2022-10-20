@@ -19,13 +19,19 @@ public class FindUnique {
         nums.add(3);
         nums.add(1);
 
+        System.out.println("============================================");
+        System.out.println("nums:");
+        System.out.println(nums);
+
+        System.out.println("============================================");
+        System.out.println("uniqNums:");
         System.out.println(findUnique(nums));
 
     }
 
-    private static HashSet<Integer> findUnique(ArrayList<Integer> nums) {
+    private static ArrayList<Integer> findUnique(ArrayList<Integer> nums) {
         HashSet<Integer> uniqNums = new HashSet<>(nums);
-        return uniqNums;
+        return new ArrayList<>(uniqNums);
     }
 
 }

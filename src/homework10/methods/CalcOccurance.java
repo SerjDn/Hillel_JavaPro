@@ -12,55 +12,37 @@ public class CalcOccurance {
         words.add("tram");
         words.add("car");
         words.add("train");
-        words.add("plain");
+        words.add("plane");
         words.add("bus");
         words.add("train");
         words.add("bike");
         words.add("car");
 
         calcOccurance(words);
-
     }
 
-//    private static void calcOccurance(ArrayList<String> words) {
-//        HashSet<String> uniqWords = new HashSet<>(words);
-//        System.out.println(uniqWords);
-//    }
-
     private static void calcOccurance(ArrayList<String> words) {
-        HashMap<String, Integer> map = new HashMap<>();
+        HashMap<String, Integer> countWords = new HashMap<>();
+
         for (int i = 0; i < words.size(); i++) {
-            String thisWord = words.get(i);
-            Integer thisWordCount = map.get(thisWord);
-            System.out.println("Мне нужно узнать сколько раз встречается слово: " + thisWord + " " +
-                    "и записать это в HashMap " + map + "." +
-                    " Это запишется вместо: " + map.get(thisWord) + " " + ". " +
-                    "Метод containsKey возвращает: " + map.containsKey(thisWord));
-            if (map.containsKey(thisWord)) {
-                map.put(thisWord, thisWordCount + 1);
+            String word = words.get(i);
+            Integer counter = countWords.get(word);
+            if (countWords.containsKey(word)) {
+                countWords.put(word, counter + 1);
             } else {
-                map.put(thisWord, 1);
+                countWords.put(word, 1);
             }
         }
 
         System.out.println("============================");
-        System.out.println(map.get("car"));
+        System.out.println(countWords.get("car"));
         System.out.println("============================");
-        System.out.println(map);
+        System.out.println(countWords);
         System.out.println("============================");
 
-        for (Map.Entry<String, Integer> wordOccurrence : map.entrySet()) {
+        for (Map.Entry<String, Integer> wordOccurrence : countWords.entrySet()) {
             System.out.println(wordOccurrence.getKey() + ": " + wordOccurrence.getValue());
         }
-
-        System.out.println("============================");
-
-        Set<Map.Entry<String, Integer> > entrySet = map.entrySet();
-
-        // Creating an ArrayList of Entry objects
-        ArrayList<Map.Entry<String, Integer> > listOfEntry = new ArrayList<>(entrySet);
-
-        System.out.println(listOfEntry);
     }
 
 }

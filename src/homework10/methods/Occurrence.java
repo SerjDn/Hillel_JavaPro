@@ -10,9 +10,6 @@ public class Occurrence {
         this.count = count;
     }
 
-    public Occurrence() {
-    }
-
     public String getName() {
         return name;
     }

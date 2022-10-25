@@ -10,8 +10,11 @@ public class Main {
         FileData fileData4 = new FileData("First Homework", 15, "C:/Practice/Homework1");
 
         FileNavigator fileNavigator = new FileNavigator();
+        fileNavigator.add("C:/Hillel", fileData3);
         fileNavigator.add("C:/Hillel", fileData1);
         fileNavigator.add("C:/Hillel", fileData2);
+        fileNavigator.add("C:/Hillel", fileData3);
+        fileNavigator.add("C:/Hillel", fileData3);
         fileNavigator.add("C:/Hillel", fileData3);
         fileNavigator.add("C:/Practice", fileData4);
 
@@ -34,7 +37,7 @@ public class Main {
 
         System.out.println("\n================================================");
         System.out.println("Method remove working:");
-        fileNavigator.remove("C:/Hillel/Lesson2");
+        fileNavigator.remove("C:/Hillel/Lesson3");
         System.out.println("================================================");
 
     }

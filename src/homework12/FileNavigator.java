@@ -67,15 +67,34 @@ public class FileNavigator {
         ArrayList<FileData> valueList = new ArrayList<>();
         ArrayList<FileData> valueListToDel = new ArrayList<>();
 
+//        for (ArrayList<FileData> entry : fileStorage.values()) {
+//            for (FileData fileData : entry) {
+//                if (fileData.getPath().equals(path)) {
+//                    entry.remove(fileData);
+//                }
+//            }
+//        }
+
+        System.out.println("--------------------------------------");
+        System.out.println("Old fileStorage before removing: \n" + fileStorage.entrySet());
+        System.out.println("--------------------------------------");
+
         for (ArrayList<FileData> entry : fileStorage.values()) {
             for (int i = 0; i < entry.size(); i++) {
                 if (!entry.get(i).getPath().equals(path)) {
-                    valueList.add(entry.get(i));
+//                    valueList.add(entry.get(i));
                 } else {
-                    valueListToDel.add(entry.get(i));
+//                    valueListToDel.add(entry.get(i));
+                    System.out.println("Удаляем элемент номер: " + i + " из списка: " + entry);
+                    entry.remove(i);
+                    System.out.println("После удаления элемента номер: " + i + " список стал: " + entry);
+                    i--;
                 }
             }
         }
+
+        System.out.println("New fileStorage after removing: \n" + fileStorage.entrySet());
+        System.out.println("--------------------------------------");
 
         System.out.println("New valueList without <<" + path + ">> is: \n" + valueList);
         System.out.println("New valueList with <<" + path + ">> is: \n" + valueListToDel);
@@ -93,3 +112,7 @@ public class FileNavigator {
                 '}';
     }
 }
+//
+//        for (Map.Entry<String, Integer> wordOccurrence : countWords.entrySet()) {
+//        System.out.println(wordOccurrence.getKey() + ": " + wordOccurrence.getValue());
+//        }

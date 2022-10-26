@@ -7,10 +7,26 @@ public class FileNavigator {
     Map<String, ArrayList<FileData>> fileStorage = new HashMap<>();
 
     public void add(String url, FileData fileData) {
-        if (!fileStorage.containsKey(url)) {
-            fileStorage.put(url, new ArrayList<>());
+        if (!checkBeforeAdd(fileData)) {
+            if (!fileStorage.containsKey(url)) {
+                fileStorage.put(url, new ArrayList<>());
+            }
+            fileStorage.get(url).add(fileData);
         }
-        fileStorage.get(url).add(fileData);
+    }
+
+    private boolean checkBeforeAdd(FileData fileData) {
+        for (ArrayList<FileData> entry : fileStorage.values()) {
+            for (int i = 0; i < entry.size(); i++) {
+                if (entry.get(i).getPath().equals(fileData.getPath())) {
+                    System.out.println("================================================");
+                    System.out.println("Method checkBeforeAdd working:");
+                    System.out.println("You cannot add a new file with the same path <<" + fileData.getPath() + ">>");
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public ArrayList<FileData> find(String url) {
@@ -49,42 +65,14 @@ public class FileNavigator {
         return valueList;
     }
 
-//    private void filterBySizeTest() {
-//        ArrayList valueList = new ArrayList<>();
-//        for (Map.Entry entry : fileStorage.entrySet()) {
-//            System.out.println(entry);
-//            System.out.println(entry.getKey() + " | " + entry.getValue());
-//            valueList.add(entry.getValue());
-//        }
-//        System.out.println("------------------------------");
-//        ArrayList<FileData> fileData = new ArrayList<>(valueList);
-//        for (int i = 0; i < fileData.size(); i++) {
-//            System.out.println(fileData.get(i).getPath());
-//        }
-//    }
-
     public void remove(String path) {
-        ArrayList<FileData> valueList = new ArrayList<>();
-        ArrayList<FileData> valueListToDel = new ArrayList<>();
-
-//        for (ArrayList<FileData> entry : fileStorage.values()) {
-//            for (FileData fileData : entry) {
-//                if (fileData.getPath().equals(path)) {
-//                    entry.remove(fileData);
-//                }
-//            }
-//        }
-
         System.out.println("--------------------------------------");
         System.out.println("Old fileStorage before removing: \n" + fileStorage.entrySet());
         System.out.println("--------------------------------------");
 
         for (ArrayList<FileData> entry : fileStorage.values()) {
             for (int i = 0; i < entry.size(); i++) {
-                if (!entry.get(i).getPath().equals(path)) {
-//                    valueList.add(entry.get(i));
-                } else {
-//                    valueListToDel.add(entry.get(i));
+                if (entry.get(i).getPath().equals(path)) {
                     System.out.println("Удаляем элемент номер: " + i + " из списка: " + entry);
                     entry.remove(i);
                     System.out.println("После удаления элемента номер: " + i + " список стал: " + entry);
@@ -93,16 +81,9 @@ public class FileNavigator {
             }
         }
 
+        System.out.println("--------------------------------------");
         System.out.println("New fileStorage after removing: \n" + fileStorage.entrySet());
         System.out.println("--------------------------------------");
-
-        System.out.println("New valueList without <<" + path + ">> is: \n" + valueList);
-        System.out.println("New valueList with <<" + path + ">> is: \n" + valueListToDel);
-
-        for (Map.Entry entry : fileStorage.entrySet()) {
-            System.out.println("key + value:");
-            System.out.println(entry.getKey() + " + " + entry.getValue());
-        }
     }
 
     @Override
@@ -112,7 +93,3 @@ public class FileNavigator {
                 '}';
     }
 }
-//
-//        for (Map.Entry<String, Integer> wordOccurrence : countWords.entrySet()) {
-//        System.out.println(wordOccurrence.getKey() + ": " + wordOccurrence.getValue());
-//        }

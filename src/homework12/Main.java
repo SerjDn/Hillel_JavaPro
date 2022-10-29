@@ -7,7 +7,7 @@ public class Main {
         FileData fileData1 = new FileData("First Lesson", 10, "C:/Hillel/Lesson1");
         FileData fileData2 = new FileData("Second Lesson", 20, "C:/Hillel/Lesson2");
         FileData fileData3 = new FileData("Third Lesson", 30, "C:/Hillel/Lesson3");
-        FileData fileData4 = new FileData("First Homework", 15, "C:/Practice/Homework1");
+        FileData fileData4 = new FileData("First Homework", 25, "C:/Practice/Homework1");
 
         FileNavigator fileNavigator = new FileNavigator();
         fileNavigator.add("C:/Hillel", fileData1);
@@ -33,6 +33,10 @@ public class Main {
         System.out.println("\n================================================");
         System.out.println("Method remove working:");
         fileNavigator.remove("C:/Hillel/Lesson3");
+
+        System.out.println("\n================================================");
+        System.out.println("Method sortBySize working:");
+        fileNavigator.sortBySize();
 
     }
 }

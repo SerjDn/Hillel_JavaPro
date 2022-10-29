@@ -1,6 +1,6 @@
 package homework12;
 
-public class FileData {
+public class FileData implements Comparable<FileData> {
 
     private String name;
     private int size;
@@ -34,6 +34,11 @@ public class FileData {
         this.name = name;
         this.size = size;
         this.path = path;
+    }
+
+    @Override
+    public int compareTo(FileData o) {
+        return this.size - o.getSize();
     }
 
     @Override

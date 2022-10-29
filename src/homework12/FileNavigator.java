@@ -42,20 +42,14 @@ public class FileNavigator {
     public ArrayList<FileData> filterBySize(int size) {
         ArrayList<FileData> valueList = new ArrayList<>();
 
+        System.out.println("List is:\n" + fileStorage.values());
+        System.out.println("size = " + size);
+        System.out.println("List after filter is:");
         for (ArrayList<FileData> entry : fileStorage.values()) {
             for (int i = 0; i < entry.size(); i++) {
-                valueList.add(entry.get(i));
-            }
-        }
-
-        System.out.println("valueList is:\n" + valueList);
-        System.out.println("size = " + size);
-        System.out.println("valueList after filter is:");
-
-        for (int i = 0; i < valueList.size(); i++) {
-            if (valueList.get(i).getSize() > size) {
-                valueList.remove(i);
-                i--;
+                if (entry.get(i).getSize() <= size) {
+                    valueList.add(entry.get(i));
+                }
             }
         }
 
@@ -66,24 +60,39 @@ public class FileNavigator {
     }
 
     public void remove(String path) {
-        System.out.println("--------------------------------------");
-        System.out.println("Old fileStorage before removing: \n" + fileStorage.entrySet());
-        System.out.println("--------------------------------------");
+        System.out.println("\nOld fileStorage before removing: \n" + fileStorage.entrySet());
 
         for (ArrayList<FileData> entry : fileStorage.values()) {
             for (int i = 0; i < entry.size(); i++) {
                 if (entry.get(i).getPath().equals(path)) {
-                    System.out.println("Удаляем элемент номер: " + i + " из списка: " + entry);
+                    System.out.println("\nRemoving element number " + i + " from the list: " + entry);
                     entry.remove(i);
-                    System.out.println("После удаления элемента номер: " + i + " список стал: " + entry);
+                    System.out.println("After removing element number " + i + " the list became: " + entry);
                     i--;
                 }
             }
         }
 
-        System.out.println("--------------------------------------");
-        System.out.println("New fileStorage after removing: \n" + fileStorage.entrySet());
-        System.out.println("--------------------------------------");
+        System.out.println("\nNew fileStorage after removing: \n" + fileStorage.entrySet());
+    }
+
+    public void sortBySize() {
+        ArrayList<FileData> sortedFiles = new ArrayList<>();
+
+        for (ArrayList<FileData> entry : fileStorage.values()) {
+            sortedFiles.addAll(entry);
+        }
+
+        System.out.println("\nBefore: ");
+        for (FileData entry : sortedFiles) {
+            System.out.println(entry);
+        }
+
+        System.out.println("\nAfter: ");
+        Collections.sort(sortedFiles);
+        for (FileData entry : sortedFiles) {
+            System.out.println(entry);
+        }
     }
 
     @Override

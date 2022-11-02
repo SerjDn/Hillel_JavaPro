@@ -7,7 +7,17 @@ public class BookManager {
 
     Map<String, Integer> words = new HashMap<>();
     List<Words> sortedWords = new ArrayList<>();
-    final int SELECT_TOP = 10;
+    final int SELECT_TOP_N = 10;
+
+    private String bookName;
+
+    public String getBookName() {
+        return bookName;
+    }
+
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
 
     public boolean findBook(String name) {
         try (FileReader fileReader = new FileReader("src/homework13/" + name + ".txt");
@@ -46,16 +56,10 @@ public class BookManager {
         }
         System.out.println(sortedWords);
 
-        List<Map.Entry<String, Integer>> newUniqWords = words.entrySet().stream()
-                .sorted((Map.Entry<String, Integer> entry1, Map.Entry<String, Integer> entry2) -> -(entry1.getValue() - entry2.getValue()))
-                .toList();
-        System.out.println("Look here!");
-        System.out.println(newUniqWords);
-
         System.out.println("=========================================================================================");
         System.out.println("List after sorting:");
         Collections.sort(sortedWords);
-        for (int i = 0; i < sortedWords.size() && i < SELECT_TOP; i++) {
+        for (int i = 0; i < sortedWords.size() && i < SELECT_TOP_N; i++) {
             System.out.println((i + 1) + ") " + sortedWords.get(i).getName() + ": " + sortedWords.get(i).getCount() + " matches");
         }
 
@@ -65,10 +69,10 @@ public class BookManager {
         System.out.println("=========================================================================================");
     }
 
-    public void addToFile() {
-        File file = new File("src/homework13/java_statistic.txt");
+    public void addToFile(String name) {
+        File file = new File("src/homework13/" + name + "_statistic.txt");
         try (PrintWriter printWriter = new PrintWriter(file)) {
-            for (int i = 0; i < sortedWords.size() && i < SELECT_TOP; i++) {
+            for (int i = 0; i < sortedWords.size() && i < SELECT_TOP_N; i++) {
                 printWriter.write((i + 1) + ") " + sortedWords.get(i).getName() + ": " + sortedWords.get(i).getCount() + " matches\n");
                 printWriter.flush();
             }

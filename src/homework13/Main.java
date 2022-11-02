@@ -11,7 +11,8 @@ public class Main {
 
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.println("Enter the name of the book: \n(Help: You have to enter <java>)");
-            if (bookManager.findBook(scanner.nextLine())) {
+            bookManager.setBookName(scanner.nextLine());
+            if (bookManager.findBook(bookManager.getBookName())) {
                 bookManager.showBookInfo();
             } else {
                 System.exit(0);
@@ -22,7 +23,7 @@ public class Main {
             int addStat = scanner.nextInt();
             switch (addStat) {
                 case 1 -> {
-                    bookManager.addToFile();
+                    bookManager.addToFile(bookManager.getBookName());
                     System.out.println("Ok. See more info in statistic-file.");
                 }
                 case 2 -> {

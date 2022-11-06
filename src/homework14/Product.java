@@ -1,13 +1,32 @@
 package homework14;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 public class Product {
 
     private String type;
     private int price;
+    private boolean discount;
+    private LocalDateTime createDate;
+    private int idNumber;
 
     public Product(String type, int price) {
         this.type = type;
         this.price = price;
+    }
+
+    public Product(String type, int price, boolean discount) {
+        this.type = type;
+        this.price = price;
+        this.discount = discount;
+    }
+
+    public Product(String type, int price, LocalDateTime createDate) {
+        this.type = type;
+        this.price = price;
+        this.createDate = createDate;
     }
 
     public String getType() {
@@ -26,11 +45,38 @@ public class Product {
         this.price = price;
     }
 
+    public boolean isDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(boolean discount) {
+        this.discount = discount;
+    }
+
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
+    }
+
+    public int getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(int idNumber) {
+        this.idNumber = idNumber;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
                 "type='" + type + '\'' +
                 ", price=" + price +
+                ", discount=" + discount +
+                ", createDate=" + createDate +
+                ", idNumber=" + idNumber +
                 '}';
     }
 }

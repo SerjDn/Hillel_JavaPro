@@ -1,12 +1,10 @@
 package homework14;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Main {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         ProductBuilder productBuilder = new ProductBuilder();
 
@@ -25,17 +23,16 @@ public class Main {
         System.out.println(productBuilder.filterProducts);
 
         productBuilder.addProduct("Book", 370, LocalDateTime.now());
-        Thread.sleep(1000);
         productBuilder.addProduct("Book", 375, LocalDateTime.now());
-        Thread.sleep(1000);
         productBuilder.addProduct("Toy", 400, LocalDateTime.now());
-        Thread.sleep(1000);
         productBuilder.addProduct("Toy", 450, LocalDateTime.now());
         System.out.println(productBuilder.products);
         productBuilder.filterProduct(productBuilder.products, 3);
         System.out.println(productBuilder.filterProducts);
 
-        productBuilder.calcPriceOfProducts(productBuilder.products, "Book", 2022);
+        productBuilder.calcPriceOfProducts(productBuilder.products, "Book", 2022, 75);
+
+        productBuilder.groupingProducts(productBuilder.products);
 
     }
 }

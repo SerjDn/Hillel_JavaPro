@@ -1,10 +1,8 @@
 package homework14;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ProductBuilder {
@@ -57,10 +55,33 @@ public class ProductBuilder {
         return filterProducts;
     }
 
-    public void calcPriceOfProducts(List<Product> products, String type, int year) {
-        products.stream()
+    public void calcPriceOfProducts(List<Product> products, String type, int year, int price) {
+        int priceForAll = 0;
+        List<Product> sortedProducts = products.stream()
+                .filter(s -> s.getType().equals(type))
                 .filter(s -> s.getCreateDate() != null)
-                .forEach(s -> System.out.println(s.getCreateDate().getYear()));
+                .filter(s -> s.getCreateDate().getYear() == year)
+                .filter(s -> s.getPrice() >= price)
+                .toList();
+
+        for (int i = 0; i < sortedProducts.size(); i++) {
+            priceForAll += sortedProducts.get(i).getPrice();
+        }
+        System.out.println("==========================================");
+        System.out.println("List of goods: " + sortedProducts);
+        System.out.println("Price for all goods is: " + priceForAll);
+        System.out.println("==========================================");
+    }
+
+    public void groupingProducts(List<Product> products) {
+        Map<String, ArrayList<Product>> mapOfProducts = new HashMap<>();
+        products.forEach(s -> {
+            if (!mapOfProducts.containsKey(s.getType())) {
+                mapOfProducts.put(s.getType(), new ArrayList<Product>());
+            }
+            mapOfProducts.get(s.getType()).add(s);
+        });
+        System.out.println(mapOfProducts);
     }
 
     @Override

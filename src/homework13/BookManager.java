@@ -7,7 +7,8 @@ public class BookManager {
 
     Map<String, Integer> words = new HashMap<>();
     List<Words> sortedWords = new ArrayList<>();
-    final int SELECT_TOP_N = 10;
+    public static final int SELECT_TOP_N = 10;
+    public static final String LINE_SEPARATOR = "=========================================================================================\n";
 
     private String bookName;
 
@@ -19,7 +20,7 @@ public class BookManager {
         this.bookName = bookName;
     }
 
-    public boolean findBook(String name) {
+    public boolean processBook(String name) {
         try (FileReader fileReader = new FileReader("src/homework13/" + name + ".txt");
              BufferedReader bufferedReader = new BufferedReader(fileReader))
         {
@@ -45,28 +46,23 @@ public class BookManager {
     }
 
     public void showBookInfo() {
-        System.out.println("=========================================================================================");
-        System.out.println("Map before sorting:");
+        System.out.println(LINE_SEPARATOR + "Map before sorting:");
         System.out.println(words.entrySet());
 
-        System.out.println("=========================================================================================");
-        System.out.println("List before sorting:");
+        System.out.println(LINE_SEPARATOR + "List before sorting:");
         for (Map.Entry<String, Integer> entry : words.entrySet()) {
             sortedWords.add(new Words(entry.getKey(), entry.getValue()));
         }
         System.out.println(sortedWords);
 
-        System.out.println("=========================================================================================");
-        System.out.println("List after sorting:");
+        System.out.println(LINE_SEPARATOR + "List after sorting:");
         Collections.sort(sortedWords);
         for (int i = 0; i < sortedWords.size() && i < SELECT_TOP_N; i++) {
             System.out.println((i + 1) + ") " + sortedWords.get(i).getName() + ": " + sortedWords.get(i).getCount() + " matches");
         }
 
-        System.out.println("=========================================================================================");
-        System.out.println("Count uniq words:");
-        System.out.println(sortedWords.size());
-        System.out.println("=========================================================================================");
+        System.out.println(LINE_SEPARATOR + "Count uniq words:");
+        System.out.println(sortedWords.size() + "\n" + LINE_SEPARATOR);
     }
 
     public void addToFile(String name) {

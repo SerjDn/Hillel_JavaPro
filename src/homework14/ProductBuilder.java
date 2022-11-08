@@ -13,7 +13,7 @@ public class ProductBuilder {
         products.add(new Product(type, price));
     }
 
-    public List<Product> filterProducts(List<Product> products, String type) {
+    public List<Product> filterProducts(String type) {
         List<Product> filteredProducts = products.stream()
                 .filter(s -> s.getType().equals(type))
                 .filter(s -> s.getPrice() > 250)
@@ -25,27 +25,23 @@ public class ProductBuilder {
         products.add(new Product(type, price, discount));
     }
 
-    public List<Product> discountProduct(List<Product> products, String type, boolean discount) {
+    public List<Product> discountProduct(String type, boolean discount) {
         List<Product> discountedProducts = products.stream()
                 .filter(s -> s.getType().equals(type))
                 .filter(s -> s.isDiscount() == discount)
-                .map(s -> {
-                    double num = s.getPrice() * DISCOUNT_MULTIPLIER;
-                    s.setPrice((int) num);
-                    return s;
-                })
+                .map(s -> new Product(s.getType(), (int) (s.getPrice() * DISCOUNT_MULTIPLIER), s.isDiscount()))
                 .collect(Collectors.toList());
         return discountedProducts;
     }
 
-    public List<Product> getCheapProduct(List<Product> products, String type) {
+    public List<Product> getCheapProduct(String type) {
         List<Product> theCheapest = products.stream()
                 .filter(s -> s.getType().equals(type))
                 .sorted((s1, s2) -> s1.getPrice() - s2.getPrice())
                 .limit(1)
                 .collect(Collectors.toList());
         if (theCheapest.isEmpty()) {
-            System.out.println("Product " + "<" + type + ">" + " not found");
+            throw new RuntimeException("Product " + "<" + type + ">" + " not found");
         }
         return theCheapest;
     }
@@ -54,7 +50,7 @@ public class ProductBuilder {
         products.add(new Product(type, price, createDate));
     }
 
-    public List<Product> getLastProducts(List<Product> products, int count) {
+    public List<Product> getLastProducts(int count) {
         List<Product> lastProducts = products.stream()
                 .filter(s -> s.getCreateDate() != null)
                 .sorted((s1, s2) -> s2.getCreateDate().compareTo(s1.getCreateDate()))
@@ -63,7 +59,7 @@ public class ProductBuilder {
         return lastProducts;
     }
 
-    public void calcPriceOfProducts(List<Product> products, String type, int year, int price) {
+    public void calcPriceOfProducts(String type, int year, int price) {
         int priceForAll = 0;
         List<Product> filteredProducts = products.stream()
                 .filter(s -> s.getType().equals(type))
@@ -79,14 +75,9 @@ public class ProductBuilder {
         System.out.println("Price for all goods is: " + priceForAll);
     }
 
-    public void groupProducts(List<Product> products) {
-        Map<String, ArrayList<Product>> mapOfProducts = new HashMap<>();
-        products.forEach(s -> {
-            if (!mapOfProducts.containsKey(s.getType())) {
-                mapOfProducts.put(s.getType(), new ArrayList<>());
-            }
-            mapOfProducts.get(s.getType()).add(s);
-        });
+    public void groupProducts() {
+        Map<String, List<Product>> mapOfProducts = products.stream()
+                .collect(Collectors.groupingBy(s -> s.getType()));
         System.out.println(mapOfProducts);
     }
 

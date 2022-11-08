@@ -8,7 +8,6 @@ public class Product {
     private int price;
     private boolean discount;
     private LocalDateTime createDate;
-    private int idNumber;
 
     public Product(String type, int price) {
         this.type = type;
@@ -59,14 +58,6 @@ public class Product {
         this.createDate = createDate;
     }
 
-    public int getIdNumber() {
-        return idNumber;
-    }
-
-    public void setIdNumber(int idNumber) {
-        this.idNumber = idNumber;
-    }
-
     @Override
     public String toString() {
         return "Product{" +
@@ -74,7 +65,6 @@ public class Product {
                 ", price=" + price +
                 ", discount=" + discount +
                 ", createDate=" + createDate +
-                ", idNumber=" + idNumber +
                 '}';
     }
 }

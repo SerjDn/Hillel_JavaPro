@@ -1,0 +1,12 @@
+1) java: 16 matches
+2) the: 14 matches
+3) and: 7 matches
+4) that: 5 matches
+5) sun: 4 matches
+6) are: 3 matches
+7) run: 3 matches
+8) programming: 3 matches
+9) jvm: 3 matches
+10) most: 3 matches
+
+Count uniq words: 143
